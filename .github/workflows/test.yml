@@ -1,0 +1,97 @@
+name: test
+
+on:
+  workflow_dispatch:
+  workflow_call:
+  push:
+    branches:
+      - main
+
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, '[ci skip]')"
+    continue-on-error: true
+    strategy:
+      fail-fast: true
+      matrix:
+        stage: [unstable, testing, release-3_0, release-3_1]
+        os:
+          - distro: debian
+            codename: bullseye
+          - distro: debian
+            codename: bookworm
+          - distro: debian
+            codename: testing
+
+          - distro: ubuntu
+            codename: focal
+          - distro: ubuntu
+            codename: jammy
+          - distro: ubuntu
+            codename: mantic
+          - distro: ubuntu
+            codename: noble
+    env:
+      apt-key-url: http://regolith-desktop.org/regolith3.key
+      apt-repo-line: "deb [arch=amd64] https://regolith-desktop.org/${{ matrix.stage }}-${{ matrix.os.distro }}-${{ matrix.os.codename }}-amd64 ${{ matrix.os.codename }} main"
+      target-package: regolith-desktop
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install ${{ matrix.os.distro }} ${{ matrix.os.codename }} ${{ matrix.stage }}
+        if: matrix.os.distro == 'debian' && matrix.os.codename == 'bullseye'
+        uses: ./debian/bullseye
+        with:
+          apt-key-url: ${{ env.apt-key-url }}
+          apt-repo-line: ${{ env.apt-repo-line }}
+          target-package: ${{ env.target-package }}
+
+      - name: Install ${{ matrix.os.distro }} ${{ matrix.os.codename }} ${{ matrix.stage }}
+        if: matrix.os.distro == 'debian' && matrix.os.codename == 'bookworm'
+        uses: ./debian/bookworm
+        with:
+          apt-key-url: ${{ env.apt-key-url }}
+          apt-repo-line: ${{ env.apt-repo-line }}
+          target-package: ${{ env.target-package }}
+
+      - name: Install ${{ matrix.os.distro }} ${{ matrix.os.codename }} ${{ matrix.stage }}
+        if: matrix.os.distro == 'debian' && matrix.os.codename == 'testing'
+        uses: ./debian/testing
+        with:
+          apt-key-url: ${{ env.apt-key-url }}
+          apt-repo-line: ${{ env.apt-repo-line }}
+          target-package: ${{ env.target-package }}
+
+      - name: Install ${{ matrix.os.distro }} ${{ matrix.os.codename }} ${{ matrix.stage }}
+        if: matrix.os.distro == 'ubuntu' && matrix.os.codename == 'focal'
+        uses: ./ubuntu/focal
+        with:
+          apt-key-url: ${{ env.apt-key-url }}
+          apt-repo-line: ${{ env.apt-repo-line }}
+          target-package: ${{ env.target-package }}
+
+      - name: Install ${{ matrix.os.distro }} ${{ matrix.os.codename }} ${{ matrix.stage }}
+        if: matrix.os.distro == 'ubuntu' && matrix.os.codename == 'jammy'
+        uses: ./ubuntu/jammy
+        with:
+          apt-key-url: ${{ env.apt-key-url }}
+          apt-repo-line: ${{ env.apt-repo-line }}
+          target-package: ${{ env.target-package }}
+
+      - name: Install ${{ matrix.os.distro }} ${{ matrix.os.codename }} ${{ matrix.stage }}
+        if: matrix.os.distro == 'ubuntu' && matrix.os.codename == 'mantic'
+        uses: ./ubuntu/mantic
+        with:
+          apt-key-url: ${{ env.apt-key-url }}
+          apt-repo-line: ${{ env.apt-repo-line }}
+          target-package: ${{ env.target-package }}
+
+      - name: Install ${{ matrix.os.distro }} ${{ matrix.os.codename }} ${{ matrix.stage }}
+        if: matrix.os.distro == 'ubuntu' && matrix.os.codename == 'noble'
+        uses: ./ubuntu/noble
+        with:
+          apt-key-url: ${{ env.apt-key-url }}
+          apt-repo-line: ${{ env.apt-repo-line }}
+          target-package: ${{ env.target-package }}
