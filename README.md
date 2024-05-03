@@ -30,7 +30,7 @@ jobs:
             codename: jammy
     steps:
       - name: Test ${{ matrix.stage }} ${{ matrix.distro-codename }} ${{ matrix.arch }}
-        uses: khos2ow/test-desktop-installable-action/ubuntu/jammy@main
+        uses: regolith-linux/test-desktop-installable-action/ubuntu/jammy@main
         with:
           apt-key-url: http://regolith-desktop.org/regolith3.key
           apt-repo-line: "deb [arch=${{ matrix.arch }}] https://regolith-desktop.org/${{ matrix.stage }}-${{ matrix.distro }}-${{ matrix.codename }}-${{ matrix.arch }} ${{ matrix.codename }} main"
