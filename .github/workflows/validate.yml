@@ -1,0 +1,41 @@
+name: validate
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 2 * * *'
+  push:
+    branches:
+      - main
+
+jobs:
+  workflow-files:
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, '[ci skip]')"
+    permissions:
+      actions: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: 1.22
+
+      - name: Generate workflow files
+        run: |
+          cd .github/scripts/update-workflows
+          go mod download
+          go run main.go
+          mv .github/scripts/update-workflows/ci-generated.yml .github/workflows/ci.yml 2>/dev/null || :
+          mv .github/scripts/update-workflows/test-generated.yml .github/workflows/test.yml 2>/dev/null || :
+
+      - uses: stefanzweifel/git-auto-commit-action@v5
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          file_pattern: '.github/workflows/*.yml'
+          commit_message: "chore: update ci and test workflow files"
