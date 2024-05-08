@@ -30,6 +30,7 @@ jobs:
           cd .github/scripts/update-workflows
           go mod download
           go run main.go
+          cd -
           mv .github/scripts/update-workflows/ci-generated.yml .github/workflows/ci.yml 2>/dev/null || :
           mv .github/scripts/update-workflows/test-generated.yml .github/workflows/test.yml 2>/dev/null || :
 
