@@ -6,6 +6,7 @@ import (
 	_ "embed" //nolint
 	"fmt"
 	"os"
+	"path/filepath"
 	"text/template"
 
 	"github.com/google/go-github/v61/github"
@@ -28,8 +29,14 @@ var supportedDistros = []distribution{Debian, Ubuntu}
 //go:embed tmpl/ci.tmpl
 var tplCI []byte
 
-//go:embed tmpl/test.tmpl
-var tplTest []byte
+//go:embed tmpl/test-old-repo.tmpl
+var tplOldRepoTest []byte
+
+//go:embed tmpl/test-new-repo.tmpl
+var tplNewRepoTest []byte
+
+//go:embed tmpl/test-migrate-repo.tmpl
+var tplMigrateRepoTest []byte
 
 func main() {
 	distros, err := getDistros()
@@ -43,7 +50,17 @@ func main() {
 		os.Exit(1)
 	}
 
-	if err = renderFiles(tplTest, "test", distros); err != nil {
+	if err = renderFiles(tplOldRepoTest, "test-old-repo", distros); err != nil {
+		fmt.Fprintf(os.Stderr, "Error: %s\n", err.Error())
+		os.Exit(1)
+	}
+
+	if err = renderFiles(tplNewRepoTest, "test-new-repo", distros); err != nil {
+		fmt.Fprintf(os.Stderr, "Error: %s\n", err.Error())
+		os.Exit(1)
+	}
+
+	if err = renderFiles(tplMigrateRepoTest, "test-migrate-repo", distros); err != nil {
 		fmt.Fprintf(os.Stderr, "Error: %s\n", err.Error())
 		os.Exit(1)
 	}
@@ -149,5 +166,10 @@ func renderFiles(tpl []byte, name string, distros []Distro) error {
 		return err
 	}
 
-	return os.WriteFile(fmt.Sprintf("%s-generated.yml", name), buffer.Bytes(), 0644)
+	newpath := filepath.Join(".", "generated")
+	if err := os.MkdirAll(newpath, os.ModePerm); err != nil {
+		return err
+	}
+
+	return os.WriteFile(fmt.Sprintf("generated/%s.yml", name), buffer.Bytes(), 0644)
 }
