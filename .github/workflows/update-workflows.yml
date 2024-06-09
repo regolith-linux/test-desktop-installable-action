@@ -1,4 +1,4 @@
-name: validate
+name: update-workflows
 
 on:
   workflow_dispatch:
@@ -23,16 +23,13 @@ jobs:
       - name: Setup Go
         uses: actions/setup-go@v5
         with:
-          go-version: 1.22
+          go-version: 1.23
 
       - name: Generate workflow files
         run: |
           cd .github/scripts/update-workflows
           go mod download
-          go run main.go
-          cd -
-          mv .github/scripts/update-workflows/ci-generated.yml .github/workflows/ci.yml 2>/dev/null || :
-          mv .github/scripts/update-workflows/test-generated.yml .github/workflows/test.yml 2>/dev/null || :
+          make clean generate copy
 
       - uses: stefanzweifel/git-auto-commit-action@v5
         env:

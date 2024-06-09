@@ -3,7 +3,7 @@
 # This file is auto-generated from .github/scripts/update-workflows and any
 # manual changes will be overwritten, nightly.
 #
-# - to change this file: modify .github/scripts/update-workflows/tmpl/test.tmpl
+# - to change this file: modify .github/scripts/update-workflows/tmpl/test-migrate-repo.tmpl
 #
 # - to add new distros: modify .github/scripts/update-workflows/main.go and add
 #   a new entry to `supportedDistros`
@@ -11,7 +11,7 @@
 # - to add new codename: just simply create a subfolder in corresponding distro
 #   folder, and `update-workflows.yml` actions will repopulate this file
 
-name: test
+name: test-migrate-repo
 
 on:
   workflow_dispatch:
@@ -31,10 +31,10 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        stage: [unstable, testing, release-3_0, release-3_1]
+        stage: [experimental, unstable, testing, stable] # release-3_0, release-3_1
     env:
-      apt-key-url: http://regolith-desktop.org/regolith3.key
-      apt-repo-line: "deb [arch=amd64] https://regolith-desktop.org/${{"{{"}} matrix.stage {{"}}"}}-{{ $name }}-{{ . }}-amd64 {{ . }} main"
+      apt-key-url: http://66.175.213.120/{{ $name }}/pubkey.gpg
+      apt-repo-line: "deb [arch=amd64] http://66.175.213.120/${{"{{"}} matrix.stage {{"}}"}}-{{ $name }}-{{ . }}-amd64 {{ . }} main"
       target-package: regolith-desktop
     steps:
       - name: Checkout
