@@ -31,10 +31,10 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        stage: [experimental, unstable, testing, stable] # release-3_0, release-3_1
+        stage: [main, experimental, unstable, testing]
     env:
       apt-key-url: http://66.175.213.120/{{ $name }}/pubkey.gpg
-      apt-repo-line: "deb [arch=amd64] http://66.175.213.120/{{ $name }} {{ . }}${{"{{"}} matrix.stage == 'stable' && '\"\"' || format('-{0}', matrix.stage) {{"}}"}} main"
+      apt-repo-line: "deb [arch=amd64] http://66.175.213.120/{{ $name }}-nosource {{ . }} ${{"{{"}} matrix.stage {{"}}"}}"
       target-package: regolith-desktop
     steps:
       - name: Checkout

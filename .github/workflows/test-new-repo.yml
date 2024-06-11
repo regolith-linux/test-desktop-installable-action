@@ -28,10 +28,10 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        stage: [experimental, unstable, testing, stable] # release-3_0, release-3_1
+        stage: [main, experimental, unstable, testing]
     env:
       apt-key-url: http://66.175.213.120/debian/pubkey.gpg
-      apt-repo-line: "deb [arch=amd64] http://66.175.213.120/debian bookworm${{ matrix.stage == 'stable' && '\"\"' || format('-{0}', matrix.stage) }} main"
+      apt-repo-line: "deb [arch=amd64] http://66.175.213.120/debian-nosource bookworm ${{ matrix.stage }}"
       target-package: regolith-desktop
     steps:
       - name: Checkout
@@ -51,10 +51,10 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        stage: [experimental, unstable, testing, stable] # release-3_0, release-3_1
+        stage: [main, experimental, unstable, testing]
     env:
       apt-key-url: http://66.175.213.120/debian/pubkey.gpg
-      apt-repo-line: "deb [arch=amd64] http://66.175.213.120/debian bullseye${{ matrix.stage == 'stable' && '\"\"' || format('-{0}', matrix.stage) }} main"
+      apt-repo-line: "deb [arch=amd64] http://66.175.213.120/debian-nosource bullseye ${{ matrix.stage }}"
       target-package: regolith-desktop
     steps:
       - name: Checkout
@@ -74,10 +74,10 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        stage: [experimental, unstable, testing, stable] # release-3_0, release-3_1
+        stage: [main, experimental, unstable, testing]
     env:
       apt-key-url: http://66.175.213.120/debian/pubkey.gpg
-      apt-repo-line: "deb [arch=amd64] http://66.175.213.120/debian testing${{ matrix.stage == 'stable' && '\"\"' || format('-{0}', matrix.stage) }} main"
+      apt-repo-line: "deb [arch=amd64] http://66.175.213.120/debian-nosource testing ${{ matrix.stage }}"
       target-package: regolith-desktop
     steps:
       - name: Checkout
@@ -97,10 +97,10 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        stage: [experimental, unstable, testing, stable] # release-3_0, release-3_1
+        stage: [main, experimental, unstable, testing]
     env:
       apt-key-url: http://66.175.213.120/ubuntu/pubkey.gpg
-      apt-repo-line: "deb [arch=amd64] http://66.175.213.120/ubuntu focal${{ matrix.stage == 'stable' && '\"\"' || format('-{0}', matrix.stage) }} main"
+      apt-repo-line: "deb [arch=amd64] http://66.175.213.120/ubuntu-nosource focal ${{ matrix.stage }}"
       target-package: regolith-desktop
     steps:
       - name: Checkout
@@ -120,10 +120,10 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        stage: [experimental, unstable, testing, stable] # release-3_0, release-3_1
+        stage: [main, experimental, unstable, testing]
     env:
       apt-key-url: http://66.175.213.120/ubuntu/pubkey.gpg
-      apt-repo-line: "deb [arch=amd64] http://66.175.213.120/ubuntu jammy${{ matrix.stage == 'stable' && '\"\"' || format('-{0}', matrix.stage) }} main"
+      apt-repo-line: "deb [arch=amd64] http://66.175.213.120/ubuntu-nosource jammy ${{ matrix.stage }}"
       target-package: regolith-desktop
     steps:
       - name: Checkout
@@ -143,10 +143,10 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        stage: [experimental, unstable, testing, stable] # release-3_0, release-3_1
+        stage: [main, experimental, unstable, testing]
     env:
       apt-key-url: http://66.175.213.120/ubuntu/pubkey.gpg
-      apt-repo-line: "deb [arch=amd64] http://66.175.213.120/ubuntu mantic${{ matrix.stage == 'stable' && '\"\"' || format('-{0}', matrix.stage) }} main"
+      apt-repo-line: "deb [arch=amd64] http://66.175.213.120/ubuntu-nosource mantic ${{ matrix.stage }}"
       target-package: regolith-desktop
     steps:
       - name: Checkout
@@ -166,10 +166,10 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        stage: [experimental, unstable, testing, stable] # release-3_0, release-3_1
+        stage: [main, experimental, unstable, testing]
     env:
       apt-key-url: http://66.175.213.120/ubuntu/pubkey.gpg
-      apt-repo-line: "deb [arch=amd64] http://66.175.213.120/ubuntu noble${{ matrix.stage == 'stable' && '\"\"' || format('-{0}', matrix.stage) }} main"
+      apt-repo-line: "deb [arch=amd64] http://66.175.213.120/ubuntu-nosource noble ${{ matrix.stage }}"
       target-package: regolith-desktop
     steps:
       - name: Checkout
