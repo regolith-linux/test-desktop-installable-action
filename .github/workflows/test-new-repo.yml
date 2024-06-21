@@ -28,7 +28,7 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        stage: [main, experimental, unstable, testing]
+        stage: [experimental, unstable, testing, main]
     env:
       apt-key-url: http://66.175.213.120/debian/pubkey.gpg
       apt-repo-line: "deb [arch=amd64] http://66.175.213.120/debian bookworm ${{ matrix.stage }}"
@@ -51,7 +51,7 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        stage: [main, experimental, unstable, testing]
+        stage: [experimental, unstable, testing, main]
     env:
       apt-key-url: http://66.175.213.120/debian/pubkey.gpg
       apt-repo-line: "deb [arch=amd64] http://66.175.213.120/debian bullseye ${{ matrix.stage }}"
@@ -74,7 +74,7 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        stage: [main, experimental, unstable, testing]
+        stage: [experimental, unstable, testing, main]
     env:
       apt-key-url: http://66.175.213.120/debian/pubkey.gpg
       apt-repo-line: "deb [arch=amd64] http://66.175.213.120/debian testing ${{ matrix.stage }}"
@@ -97,7 +97,7 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        stage: [main, experimental, unstable, testing]
+        stage: [experimental, unstable, testing, main]
     env:
       apt-key-url: http://66.175.213.120/ubuntu/pubkey.gpg
       apt-repo-line: "deb [arch=amd64] http://66.175.213.120/ubuntu focal ${{ matrix.stage }}"
@@ -120,7 +120,7 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        stage: [main, experimental, unstable, testing]
+        stage: [experimental, unstable, testing, main]
     env:
       apt-key-url: http://66.175.213.120/ubuntu/pubkey.gpg
       apt-repo-line: "deb [arch=amd64] http://66.175.213.120/ubuntu jammy ${{ matrix.stage }}"
@@ -143,7 +143,7 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        stage: [main, experimental, unstable, testing]
+        stage: [experimental, unstable, testing, main]
     env:
       apt-key-url: http://66.175.213.120/ubuntu/pubkey.gpg
       apt-repo-line: "deb [arch=amd64] http://66.175.213.120/ubuntu mantic ${{ matrix.stage }}"
@@ -166,7 +166,7 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        stage: [main, experimental, unstable, testing]
+        stage: [experimental, unstable, testing, main]
     env:
       apt-key-url: http://66.175.213.120/ubuntu/pubkey.gpg
       apt-repo-line: "deb [arch=amd64] http://66.175.213.120/ubuntu noble ${{ matrix.stage }}"

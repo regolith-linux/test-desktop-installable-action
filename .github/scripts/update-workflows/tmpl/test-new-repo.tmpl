@@ -31,7 +31,7 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        stage: [main, experimental, unstable, testing]
+        stage: [experimental, unstable, testing, main]
     env:
       apt-key-url: http://66.175.213.120/{{ $name }}/pubkey.gpg
       apt-repo-line: "deb [arch=amd64] http://66.175.213.120/{{ $name }} {{ . }} ${{"{{"}} matrix.stage {{"}}"}}"
