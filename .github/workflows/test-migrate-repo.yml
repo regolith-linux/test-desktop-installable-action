@@ -28,7 +28,7 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        stage: [experimental, unstable, testing, stable] # release-3_0, release-3_1
+        stage: [experimental, unstable, testing, release-3_0, release-3_1]
     env:
       apt-key-url: http://66.175.213.120/regolith.key
       apt-repo-line: "deb [arch=amd64] http://66.175.213.120/${{ matrix.stage }}-debian-bookworm-amd64 bookworm main"
@@ -51,7 +51,7 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        stage: [experimental, unstable, testing, stable] # release-3_0, release-3_1
+        stage: [experimental, unstable, testing, release-3_0, release-3_1]
     env:
       apt-key-url: http://66.175.213.120/regolith.key
       apt-repo-line: "deb [arch=amd64] http://66.175.213.120/${{ matrix.stage }}-debian-bullseye-amd64 bullseye main"
@@ -74,7 +74,7 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        stage: [experimental, unstable, testing, stable] # release-3_0, release-3_1
+        stage: [experimental, unstable, testing, release-3_0, release-3_1]
     env:
       apt-key-url: http://66.175.213.120/regolith.key
       apt-repo-line: "deb [arch=amd64] http://66.175.213.120/${{ matrix.stage }}-debian-testing-amd64 testing main"
@@ -97,7 +97,7 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        stage: [experimental, unstable, testing, stable] # release-3_0, release-3_1
+        stage: [experimental, unstable, testing, release-3_0, release-3_1]
     env:
       apt-key-url: http://66.175.213.120/regolith.key
       apt-repo-line: "deb [arch=amd64] http://66.175.213.120/${{ matrix.stage }}-ubuntu-focal-amd64 focal main"
@@ -120,7 +120,7 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        stage: [experimental, unstable, testing, stable] # release-3_0, release-3_1
+        stage: [experimental, unstable, testing, release-3_0, release-3_1]
     env:
       apt-key-url: http://66.175.213.120/regolith.key
       apt-repo-line: "deb [arch=amd64] http://66.175.213.120/${{ matrix.stage }}-ubuntu-jammy-amd64 jammy main"
@@ -143,7 +143,7 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        stage: [experimental, unstable, testing, stable] # release-3_0, release-3_1
+        stage: [experimental, unstable, testing, release-3_0, release-3_1]
     env:
       apt-key-url: http://66.175.213.120/regolith.key
       apt-repo-line: "deb [arch=amd64] http://66.175.213.120/${{ matrix.stage }}-ubuntu-mantic-amd64 mantic main"
@@ -166,7 +166,7 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        stage: [experimental, unstable, testing, stable] # release-3_0, release-3_1
+        stage: [experimental, unstable, testing, release-3_0, release-3_1]
     env:
       apt-key-url: http://66.175.213.120/regolith.key
       apt-repo-line: "deb [arch=amd64] http://66.175.213.120/${{ matrix.stage }}-ubuntu-noble-amd64 noble main"
