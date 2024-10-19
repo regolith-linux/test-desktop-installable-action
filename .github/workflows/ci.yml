@@ -39,10 +39,9 @@ jobs:
           - distro: ubuntu
             codename: jammy
           - distro: ubuntu
-            codename: mantic
-          - distro: ubuntu
             codename: noble
-
+          - distro: ubuntu
+            codename: oracular
     steps:
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
