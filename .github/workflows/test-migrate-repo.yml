@@ -23,7 +23,6 @@ jobs:
   debian-bookworm:
     runs-on: ubuntu-latest
     if: "!contains(github.event.head_commit.message, '[ci skip]')"
-    continue-on-error: true
     strategy:
       fail-fast: true
       matrix:
@@ -46,7 +45,6 @@ jobs:
   debian-bullseye:
     runs-on: ubuntu-latest
     if: "!contains(github.event.head_commit.message, '[ci skip]')"
-    continue-on-error: true
     strategy:
       fail-fast: true
       matrix:
@@ -69,7 +67,6 @@ jobs:
   debian-testing:
     runs-on: ubuntu-latest
     if: "!contains(github.event.head_commit.message, '[ci skip]')"
-    continue-on-error: true
     strategy:
       fail-fast: true
       matrix:
@@ -92,7 +89,6 @@ jobs:
   ubuntu-focal:
     runs-on: ubuntu-latest
     if: "!contains(github.event.head_commit.message, '[ci skip]')"
-    continue-on-error: true
     strategy:
       fail-fast: true
       matrix:
@@ -115,7 +111,6 @@ jobs:
   ubuntu-jammy:
     runs-on: ubuntu-latest
     if: "!contains(github.event.head_commit.message, '[ci skip]')"
-    continue-on-error: true
     strategy:
       fail-fast: true
       matrix:
@@ -138,7 +133,6 @@ jobs:
   ubuntu-lunar:
     runs-on: ubuntu-latest
     if: "!contains(github.event.head_commit.message, '[ci skip]')"
-    continue-on-error: true
     strategy:
       fail-fast: true
       matrix:
@@ -161,7 +155,6 @@ jobs:
   ubuntu-mantic:
     runs-on: ubuntu-latest
     if: "!contains(github.event.head_commit.message, '[ci skip]')"
-    continue-on-error: true
     strategy:
       fail-fast: true
       matrix:
@@ -184,7 +177,6 @@ jobs:
   ubuntu-noble:
     runs-on: ubuntu-latest
     if: "!contains(github.event.head_commit.message, '[ci skip]')"
-    continue-on-error: true
     strategy:
       fail-fast: true
       matrix:
@@ -207,7 +199,6 @@ jobs:
   ubuntu-oracular:
     runs-on: ubuntu-latest
     if: "!contains(github.event.head_commit.message, '[ci skip]')"
-    continue-on-error: true
     strategy:
       fail-fast: true
       matrix:
