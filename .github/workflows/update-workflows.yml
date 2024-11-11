@@ -1,4 +1,4 @@
-name: update-workflows
+name: Update workflow files
 
 on:
   workflow_dispatch:
@@ -26,10 +26,7 @@ jobs:
           go-version: 1.22.3
 
       - name: Generate workflow files
-        run: |
-          cd .github/scripts/update-workflows
-          go mod download
-          make clean generate copy
+        run: go run main.go
 
       - uses: stefanzweifel/git-auto-commit-action@v5
         env:
