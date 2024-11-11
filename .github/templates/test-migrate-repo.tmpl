@@ -38,7 +38,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install ${{"{{"}} matrix.target-package {{"}}"}} ${{"{{"}} matrix.stage {{"}}"}} on {{ $name }} {{ . }}
+      - name: Install ${{"{{"}} env.target-package {{"}}"}} ${{"{{"}} matrix.stage {{"}}"}} on {{ $name }} {{ . }}
         uses: ./{{ $name }}/{{ . }}
         with:
           apt-key-url: ${{"{{"}} env.apt-key-url {{"}}"}}

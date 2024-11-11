@@ -35,7 +35,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install ${{ matrix.target-package }} ${{ matrix.stage }} on debian bookworm
+      - name: Install ${{ env.target-package }} ${{ matrix.stage }} on debian bookworm
         uses: ./debian/bookworm
         with:
           apt-key-url: ${{ env.apt-key-url }}
@@ -57,7 +57,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install ${{ matrix.target-package }} ${{ matrix.stage }} on debian bullseye
+      - name: Install ${{ env.target-package }} ${{ matrix.stage }} on debian bullseye
         uses: ./debian/bullseye
         with:
           apt-key-url: ${{ env.apt-key-url }}
@@ -79,7 +79,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install ${{ matrix.target-package }} ${{ matrix.stage }} on debian testing
+      - name: Install ${{ env.target-package }} ${{ matrix.stage }} on debian testing
         uses: ./debian/testing
         with:
           apt-key-url: ${{ env.apt-key-url }}
@@ -101,7 +101,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install ${{ matrix.target-package }} ${{ matrix.stage }} on ubuntu focal
+      - name: Install ${{ env.target-package }} ${{ matrix.stage }} on ubuntu focal
         uses: ./ubuntu/focal
         with:
           apt-key-url: ${{ env.apt-key-url }}
@@ -123,7 +123,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install ${{ matrix.target-package }} ${{ matrix.stage }} on ubuntu jammy
+      - name: Install ${{ env.target-package }} ${{ matrix.stage }} on ubuntu jammy
         uses: ./ubuntu/jammy
         with:
           apt-key-url: ${{ env.apt-key-url }}
@@ -145,7 +145,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install ${{ matrix.target-package }} ${{ matrix.stage }} on ubuntu lunar
+      - name: Install ${{ env.target-package }} ${{ matrix.stage }} on ubuntu lunar
         uses: ./ubuntu/lunar
         with:
           apt-key-url: ${{ env.apt-key-url }}
@@ -167,7 +167,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install ${{ matrix.target-package }} ${{ matrix.stage }} on ubuntu mantic
+      - name: Install ${{ env.target-package }} ${{ matrix.stage }} on ubuntu mantic
         uses: ./ubuntu/mantic
         with:
           apt-key-url: ${{ env.apt-key-url }}
@@ -189,7 +189,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install ${{ matrix.target-package }} ${{ matrix.stage }} on ubuntu noble
+      - name: Install ${{ env.target-package }} ${{ matrix.stage }} on ubuntu noble
         uses: ./ubuntu/noble
         with:
           apt-key-url: ${{ env.apt-key-url }}
@@ -211,7 +211,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install ${{ matrix.target-package }} ${{ matrix.stage }} on ubuntu oracular
+      - name: Install ${{ env.target-package }} ${{ matrix.stage }} on ubuntu oracular
         uses: ./ubuntu/oracular
         with:
           apt-key-url: ${{ env.apt-key-url }}
