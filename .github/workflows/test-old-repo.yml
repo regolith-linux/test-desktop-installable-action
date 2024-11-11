@@ -23,9 +23,8 @@ jobs:
   debian-bookworm:
     runs-on: ubuntu-latest
     if: "!contains(github.event.head_commit.message, '[ci skip]')"
-    continue-on-error: true
     strategy:
-      fail-fast: true
+      fail-fast: false
       matrix:
         stage: [experimental, unstable, testing, release-current] # release-3_0, release-3_1, release-3_2
     env:
@@ -46,9 +45,8 @@ jobs:
   debian-bullseye:
     runs-on: ubuntu-latest
     if: "!contains(github.event.head_commit.message, '[ci skip]')"
-    continue-on-error: true
     strategy:
-      fail-fast: true
+      fail-fast: false
       matrix:
         stage: [experimental, unstable, testing, release-current] # release-3_0, release-3_1, release-3_2
     env:
@@ -69,9 +67,8 @@ jobs:
   debian-testing:
     runs-on: ubuntu-latest
     if: "!contains(github.event.head_commit.message, '[ci skip]')"
-    continue-on-error: true
     strategy:
-      fail-fast: true
+      fail-fast: false
       matrix:
         stage: [experimental, unstable, testing, release-current] # release-3_0, release-3_1, release-3_2
     env:
@@ -92,9 +89,8 @@ jobs:
   ubuntu-focal:
     runs-on: ubuntu-latest
     if: "!contains(github.event.head_commit.message, '[ci skip]')"
-    continue-on-error: true
     strategy:
-      fail-fast: true
+      fail-fast: false
       matrix:
         stage: [experimental, unstable, testing, release-current] # release-3_0, release-3_1, release-3_2
     env:
@@ -115,9 +111,8 @@ jobs:
   ubuntu-jammy:
     runs-on: ubuntu-latest
     if: "!contains(github.event.head_commit.message, '[ci skip]')"
-    continue-on-error: true
     strategy:
-      fail-fast: true
+      fail-fast: false
       matrix:
         stage: [experimental, unstable, testing, release-current] # release-3_0, release-3_1, release-3_2
     env:
@@ -138,9 +133,8 @@ jobs:
   ubuntu-lunar:
     runs-on: ubuntu-latest
     if: "!contains(github.event.head_commit.message, '[ci skip]')"
-    continue-on-error: true
     strategy:
-      fail-fast: true
+      fail-fast: false
       matrix:
         stage: [experimental, unstable, testing, release-current] # release-3_0, release-3_1, release-3_2
     env:
@@ -161,9 +155,8 @@ jobs:
   ubuntu-mantic:
     runs-on: ubuntu-latest
     if: "!contains(github.event.head_commit.message, '[ci skip]')"
-    continue-on-error: true
     strategy:
-      fail-fast: true
+      fail-fast: false
       matrix:
         stage: [experimental, unstable, testing, release-current] # release-3_0, release-3_1, release-3_2
     env:
@@ -184,9 +177,8 @@ jobs:
   ubuntu-noble:
     runs-on: ubuntu-latest
     if: "!contains(github.event.head_commit.message, '[ci skip]')"
-    continue-on-error: true
     strategy:
-      fail-fast: true
+      fail-fast: false
       matrix:
         stage: [experimental, unstable, testing, release-current] # release-3_0, release-3_1, release-3_2
     env:
@@ -207,9 +199,8 @@ jobs:
   ubuntu-oracular:
     runs-on: ubuntu-latest
     if: "!contains(github.event.head_commit.message, '[ci skip]')"
-    continue-on-error: true
     strategy:
-      fail-fast: true
+      fail-fast: false
       matrix:
         stage: [experimental, unstable, testing, release-current] # release-3_0, release-3_1, release-3_2
     env:

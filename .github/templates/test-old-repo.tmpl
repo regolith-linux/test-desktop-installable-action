@@ -26,9 +26,8 @@ jobs:
   {{ $name }}-{{ . }}:
     runs-on: ubuntu-latest
     if: "!contains(github.event.head_commit.message, '[ci skip]')"
-    continue-on-error: true
     strategy:
-      fail-fast: true
+      fail-fast: false
       matrix:
         stage: [experimental, unstable, testing, release-current] # release-3_0, release-3_1, release-3_2
     env:
