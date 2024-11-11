@@ -2,19 +2,11 @@ package main
 
 import (
 	"bytes"
-	"context"
 	_ "embed" //nolint
 	"fmt"
+	"html/template"
 	"os"
 	"path/filepath"
-	"text/template"
-
-	"github.com/google/go-github/v61/github"
-)
-
-const (
-	org  = "regolith-linux"
-	repo = "test-desktop-installable-action"
 )
 
 type distribution string
@@ -26,16 +18,16 @@ const (
 
 var supportedDistros = []distribution{Debian, Ubuntu}
 
-//go:embed tmpl/ci.tmpl
+//go:embed .github/templates/ci.tmpl
 var tplCI []byte
 
-//go:embed tmpl/test-old-repo.tmpl
+//go:embed .github/templates/test-old-repo.tmpl
 var tplOldRepoTest []byte
 
-//go:embed tmpl/test-new-repo.tmpl
+//go:embed .github/templates/test-new-repo.tmpl
 var tplNewRepoTest []byte
 
-//go:embed tmpl/test-migrate-repo.tmpl
+//go:embed .github/templates/test-migrate-repo.tmpl
 var tplMigrateRepoTest []byte
 
 func main() {
@@ -72,10 +64,13 @@ type Distro struct {
 }
 
 func getDistros() ([]Distro, error) {
-	ctx := context.Background()
-	client := github.NewClient(nil)
+	file, err := os.Open(".")
+	if err != nil {
+		return nil, err
+	}
+	defer file.Close()
 
-	dirs, err := getContents(ctx, client, "")
+	dirs, err := os.ReadDir(file.Name())
 	if err != nil {
 		return nil, err
 	}
@@ -83,67 +78,33 @@ func getDistros() ([]Distro, error) {
 	distros := []Distro{}
 
 	for _, d := range dirs {
-		if d := checkDir(d); d == nil {
+		if !d.IsDir() {
 			continue
 		}
-
-		if !isDistroSupported(*d.Name) {
+		if !isDistroSupported(d.Name()) {
 			continue
 		}
 
 		dist := Distro{
-			Name: *d.Name,
+			Name: d.Name(),
 		}
 
-		subdirs, err := getContents(ctx, client, *d.Name)
+		subdirs, err := os.ReadDir(d.Name())
 		if err != nil {
 			return nil, err
 		}
 
 		for _, s := range subdirs {
-			if s := checkDir(s); s == nil {
+			if !s.IsDir() {
 				continue
 			}
-
-			dist.Codes = append(dist.Codes, *s.Name)
+			dist.Codes = append(dist.Codes, s.Name())
 		}
 
 		distros = append(distros, dist)
 	}
 
 	return distros, nil
-}
-
-func getContents(ctx context.Context, client *github.Client, path string) ([]*github.RepositoryContent, error) {
-	opts := &github.RepositoryContentGetOptions{
-		Ref: "main",
-	}
-
-	_, dirs, _, err := client.Repositories.GetContents(ctx, org, repo, path, opts)
-	if err != nil {
-		return nil, err
-	}
-
-	if dirs == nil {
-		return nil, fmt.Errorf("error: something went wrong")
-	}
-
-	return dirs, nil
-}
-
-func checkDir(dir *github.RepositoryContent) *github.RepositoryContent {
-	if dir.Name == nil {
-		return nil
-	}
-
-	if dir.Type == nil {
-		return nil
-	}
-	if *dir.Type != "dir" {
-		return nil
-	}
-
-	return dir
 }
 
 func isDistroSupported(name string) bool {
@@ -166,10 +127,10 @@ func renderFiles(tpl []byte, name string, distros []Distro) error {
 		return err
 	}
 
-	newpath := filepath.Join(".", "generated")
+	newpath := filepath.Join(".github", "workflows")
 	if err := os.MkdirAll(newpath, os.ModePerm); err != nil {
 		return err
 	}
 
-	return os.WriteFile(fmt.Sprintf("generated/%s.yml", name), buffer.Bytes(), 0644)
+	return os.WriteFile(fmt.Sprintf(".github/workflows/%s.yml", name), buffer.Bytes(), 0644)
 }
