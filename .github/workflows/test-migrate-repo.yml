@@ -28,8 +28,8 @@ jobs:
       matrix:
         stage: [experimental, unstable, testing, release-current] # release-3_0, release-3_1, release-3_2
     env:
-      apt-key-url: http://207.126.167.82/regolith.key
-      apt-repo-line: "deb [arch=amd64] http://207.126.167.82/${{ matrix.stage }}-debian-bookworm-amd64 bookworm main"
+      apt-key-url: http://archive.regolith-desktop.com/regolith.key
+      apt-repo-line: "deb [arch=amd64] http://archive.regolith-desktop.com/${{ matrix.stage }}-debian-bookworm-amd64 bookworm main"
       target-package: regolith-desktop
     steps:
       - name: Checkout
@@ -50,8 +50,8 @@ jobs:
       matrix:
         stage: [experimental, unstable, testing, release-current] # release-3_0, release-3_1, release-3_2
     env:
-      apt-key-url: http://207.126.167.82/regolith.key
-      apt-repo-line: "deb [arch=amd64] http://207.126.167.82/${{ matrix.stage }}-debian-bullseye-amd64 bullseye main"
+      apt-key-url: http://archive.regolith-desktop.com/regolith.key
+      apt-repo-line: "deb [arch=amd64] http://archive.regolith-desktop.com/${{ matrix.stage }}-debian-bullseye-amd64 bullseye main"
       target-package: regolith-desktop
     steps:
       - name: Checkout
@@ -72,8 +72,8 @@ jobs:
       matrix:
         stage: [experimental, unstable, testing, release-current] # release-3_0, release-3_1, release-3_2
     env:
-      apt-key-url: http://207.126.167.82/regolith.key
-      apt-repo-line: "deb [arch=amd64] http://207.126.167.82/${{ matrix.stage }}-debian-testing-amd64 testing main"
+      apt-key-url: http://archive.regolith-desktop.com/regolith.key
+      apt-repo-line: "deb [arch=amd64] http://archive.regolith-desktop.com/${{ matrix.stage }}-debian-testing-amd64 testing main"
       target-package: regolith-desktop
     steps:
       - name: Checkout
@@ -94,8 +94,8 @@ jobs:
       matrix:
         stage: [experimental, unstable, testing, release-current] # release-3_0, release-3_1, release-3_2
     env:
-      apt-key-url: http://207.126.167.82/regolith.key
-      apt-repo-line: "deb [arch=amd64] http://207.126.167.82/${{ matrix.stage }}-ubuntu-focal-amd64 focal main"
+      apt-key-url: http://archive.regolith-desktop.com/regolith.key
+      apt-repo-line: "deb [arch=amd64] http://archive.regolith-desktop.com/${{ matrix.stage }}-ubuntu-focal-amd64 focal main"
       target-package: regolith-desktop
     steps:
       - name: Checkout
@@ -116,8 +116,8 @@ jobs:
       matrix:
         stage: [experimental, unstable, testing, release-current] # release-3_0, release-3_1, release-3_2
     env:
-      apt-key-url: http://207.126.167.82/regolith.key
-      apt-repo-line: "deb [arch=amd64] http://207.126.167.82/${{ matrix.stage }}-ubuntu-jammy-amd64 jammy main"
+      apt-key-url: http://archive.regolith-desktop.com/regolith.key
+      apt-repo-line: "deb [arch=amd64] http://archive.regolith-desktop.com/${{ matrix.stage }}-ubuntu-jammy-amd64 jammy main"
       target-package: regolith-desktop
     steps:
       - name: Checkout
@@ -138,8 +138,8 @@ jobs:
       matrix:
         stage: [experimental, unstable, testing, release-current] # release-3_0, release-3_1, release-3_2
     env:
-      apt-key-url: http://207.126.167.82/regolith.key
-      apt-repo-line: "deb [arch=amd64] http://207.126.167.82/${{ matrix.stage }}-ubuntu-lunar-amd64 lunar main"
+      apt-key-url: http://archive.regolith-desktop.com/regolith.key
+      apt-repo-line: "deb [arch=amd64] http://archive.regolith-desktop.com/${{ matrix.stage }}-ubuntu-lunar-amd64 lunar main"
       target-package: regolith-desktop
     steps:
       - name: Checkout
@@ -160,8 +160,8 @@ jobs:
       matrix:
         stage: [experimental, unstable, testing, release-current] # release-3_0, release-3_1, release-3_2
     env:
-      apt-key-url: http://207.126.167.82/regolith.key
-      apt-repo-line: "deb [arch=amd64] http://207.126.167.82/${{ matrix.stage }}-ubuntu-mantic-amd64 mantic main"
+      apt-key-url: http://archive.regolith-desktop.com/regolith.key
+      apt-repo-line: "deb [arch=amd64] http://archive.regolith-desktop.com/${{ matrix.stage }}-ubuntu-mantic-amd64 mantic main"
       target-package: regolith-desktop
     steps:
       - name: Checkout
@@ -182,8 +182,8 @@ jobs:
       matrix:
         stage: [experimental, unstable, testing, release-current] # release-3_0, release-3_1, release-3_2
     env:
-      apt-key-url: http://207.126.167.82/regolith.key
-      apt-repo-line: "deb [arch=amd64] http://207.126.167.82/${{ matrix.stage }}-ubuntu-noble-amd64 noble main"
+      apt-key-url: http://archive.regolith-desktop.com/regolith.key
+      apt-repo-line: "deb [arch=amd64] http://archive.regolith-desktop.com/${{ matrix.stage }}-ubuntu-noble-amd64 noble main"
       target-package: regolith-desktop
     steps:
       - name: Checkout
@@ -204,8 +204,8 @@ jobs:
       matrix:
         stage: [experimental, unstable, testing, release-current] # release-3_0, release-3_1, release-3_2
     env:
-      apt-key-url: http://207.126.167.82/regolith.key
-      apt-repo-line: "deb [arch=amd64] http://207.126.167.82/${{ matrix.stage }}-ubuntu-oracular-amd64 oracular main"
+      apt-key-url: http://archive.regolith-desktop.com/regolith.key
+      apt-repo-line: "deb [arch=amd64] http://archive.regolith-desktop.com/${{ matrix.stage }}-ubuntu-oracular-amd64 oracular main"
       target-package: regolith-desktop
     steps:
       - name: Checkout
