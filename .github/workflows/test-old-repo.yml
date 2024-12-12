@@ -21,7 +21,7 @@ concurrency:
 
 jobs:
   debian-bookworm:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     if: "!contains(github.event.head_commit.message, '[ci skip]')"
     strategy:
       fail-fast: false
@@ -43,7 +43,7 @@ jobs:
           target-package: ${{ env.target-package }}
 
   debian-bullseye:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     if: "!contains(github.event.head_commit.message, '[ci skip]')"
     strategy:
       fail-fast: false
@@ -65,7 +65,7 @@ jobs:
           target-package: ${{ env.target-package }}
 
   debian-testing:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     if: "!contains(github.event.head_commit.message, '[ci skip]')"
     strategy:
       fail-fast: false
@@ -87,7 +87,7 @@ jobs:
           target-package: ${{ env.target-package }}
 
   ubuntu-focal:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     if: "!contains(github.event.head_commit.message, '[ci skip]')"
     strategy:
       fail-fast: false
@@ -109,7 +109,7 @@ jobs:
           target-package: ${{ env.target-package }}
 
   ubuntu-jammy:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     if: "!contains(github.event.head_commit.message, '[ci skip]')"
     strategy:
       fail-fast: false
@@ -131,7 +131,7 @@ jobs:
           target-package: ${{ env.target-package }}
 
   ubuntu-lunar:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     if: "!contains(github.event.head_commit.message, '[ci skip]')"
     strategy:
       fail-fast: false
@@ -153,7 +153,7 @@ jobs:
           target-package: ${{ env.target-package }}
 
   ubuntu-mantic:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     if: "!contains(github.event.head_commit.message, '[ci skip]')"
     strategy:
       fail-fast: false
@@ -175,7 +175,7 @@ jobs:
           target-package: ${{ env.target-package }}
 
   ubuntu-noble:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     if: "!contains(github.event.head_commit.message, '[ci skip]')"
     strategy:
       fail-fast: false
@@ -197,7 +197,7 @@ jobs:
           target-package: ${{ env.target-package }}
 
   ubuntu-oracular:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     if: "!contains(github.event.head_commit.message, '[ci skip]')"
     strategy:
       fail-fast: false
