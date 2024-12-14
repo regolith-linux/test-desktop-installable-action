@@ -44,6 +44,8 @@ jobs:
             codename: noble
           - distro: ubuntu
             codename: oracular
+          - distro: ubuntu
+            codename: plucky
 
     steps:
       - name: Set up QEMU
