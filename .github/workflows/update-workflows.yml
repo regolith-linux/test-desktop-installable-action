@@ -27,7 +27,7 @@ jobs:
           go-version: 1.22.3
 
       - name: Generate workflow files
-        run: go run main.go
+        run: go run test-desktop/main.go
 
       - uses: stefanzweifel/git-auto-commit-action@v5
         env:

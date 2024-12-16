@@ -18,16 +18,16 @@ const (
 
 var supportedDistros = []distribution{Debian, Ubuntu}
 
-//go:embed .github/templates/ci.tmpl
+//go:embed _templates/ci.tmpl
 var tplCI []byte
 
-//go:embed .github/templates/test-old-repo.tmpl
+//go:embed _templates/test-old-repo.tmpl
 var tplOldRepoTest []byte
 
-//go:embed .github/templates/test-new-repo.tmpl
+//go:embed _templates/test-new-repo.tmpl
 var tplNewRepoTest []byte
 
-//go:embed .github/templates/test-migrate-repo.tmpl
+//go:embed _templates/test-migrate-repo.tmpl
 var tplMigrateRepoTest []byte
 
 func main() {
@@ -64,7 +64,7 @@ type Distro struct {
 }
 
 func getDistros() ([]Distro, error) {
-	file, err := os.Open(".")
+	file, err := os.Open("test-desktop")
 	if err != nil {
 		return nil, err
 	}
@@ -89,7 +89,7 @@ func getDistros() ([]Distro, error) {
 			Name: d.Name(),
 		}
 
-		subdirs, err := os.ReadDir(d.Name())
+		subdirs, err := os.ReadDir(filepath.Join("test-desktop", d.Name()))
 		if err != nil {
 			return nil, err
 		}

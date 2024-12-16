@@ -39,7 +39,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Install ${{"{{"}} env.target-package {{"}}"}} ${{"{{"}} matrix.stage {{"}}"}} on {{ $name }} {{ . }}
-        uses: ./{{ $name }}/{{ . }}
+        uses: ./test-desktop/{{ $name }}/{{ . }}
         with:
           apt-key-url: ${{"{{"}} env.apt-key-url {{"}}"}}
           apt-repo-line: ${{"{{"}} env.apt-repo-line {{"}}"}}
