@@ -57,7 +57,7 @@ jobs:
       - name: Build ${{ matrix.os.distro }} ${{ matrix.os.codename }}
         uses: docker/build-push-action@v6
         with:
-          context: "{{ defaultContext }}:${{ matrix.os.distro }}/${{ matrix.os.codename }}"
+          context: "{{ defaultContext }}:test-desktop/${{ matrix.os.distro }}/${{ matrix.os.codename }}"
 
   shellcheck:
     runs-on: ubuntu-24.04
