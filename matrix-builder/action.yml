@@ -1,0 +1,21 @@
+name: Calculate Supported Distros
+description: |
+  Calculate supported distros and their corresponding codenames from
+  all the folders and subfolders of voulge/stage/unstable.
+
+outputs:
+  includes:
+    description: "List of matrix include items"
+    value: ${{ steps.builder.outputs.includes }}
+
+runs:
+  using: composite
+  steps:
+    - name: Get Voulage
+      shell: bash
+      run: $GITHUB_ACTION_PATH/get-voulage.sh
+
+    - name: Matrix Includes Builder
+      id: builder
+      shell: bash
+      run: $GITHUB_ACTION_PATH/build-matrix.sh
