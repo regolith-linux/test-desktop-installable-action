@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-
 voulage_path="/tmp/voulage-actions-cache"
 
 pushd "$voulage_path" >/dev/null || exit 1

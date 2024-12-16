@@ -14,7 +14,7 @@ jobs:
     steps:
       - name: Build Matrix
         id: builder
-        uses: regolith-linux/actions/matrix-builder@main
+        uses: regolith-linux/actions/build-matrix@main
 ```
 
 ## Scenarios
@@ -28,7 +28,7 @@ jobs:
     steps:
       - name: Build Matrix
         id: builder
-        uses: regolith-linux/actions/matrix-builder@main
+        uses: regolith-linux/actions/build-matrix@main
 
   build:
     runs-on: [self-hosted, Linux, X64, "${{ matrix.codename }}"] 
