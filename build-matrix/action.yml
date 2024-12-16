@@ -1,7 +1,7 @@
-name: Calculate Supported Distros
+name: Build Matrix of Supported Distros and Codenames
 description: |
-  Calculate supported distros and their corresponding codenames from
-  all the folders and subfolders of voulge/stage/unstable.
+  Build a matrix of currently supported distros and codenames. The list is being
+  built out of `stage/unstable` folder of https://github.com/regolith-linux/voulage/.
 
 outputs:
   includes:
