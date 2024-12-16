@@ -1,0 +1,55 @@
+name: Build Package
+description: |
+  Build Package
+
+inputs:
+  name:
+    description: "Name of the package to build"
+    required: true
+  repo:
+    description: "Package git repository URL (it can be both ssh and https)"
+    required: true
+  ref:
+    description: "Package git repository ref to checkout the code from (e.g. branch, tag, or hash)"
+    required: true
+  distro:
+    description: "Target Distro to build the package for (debian, ubuntu)"
+    required: true
+  codename:
+    description: "Target Codename to build the package for (e.g. focal, bullseye)"
+    required: true
+  stage:
+    description: "Regolith release stage (e.g. unstable, testing, stable)"
+    required: true
+  gpg-email:
+    description: "Email ID associated with the GPG Key"
+    required: true
+    default: "regolith.linux@gmail.com"
+  gpg-name:
+    description: "Full Name associated with the GPG Key"
+    required: true
+    default: "Regolith Linux"
+
+runs:
+  using: composite
+  steps:
+    - name: Environment Setup
+      shell: bash
+      run: apt update && DEBIAN_FRONTEND=noninteractive apt install -y --no-install-recommends sudo jq git devscripts wget dput diffutils
+
+    - name: Get Voulage
+      shell: bash
+      run: $GITHUB_ACTION_PATH/get-voulage.sh
+
+    - name: Build Package
+      shell: bash
+      env:
+        PACKAGE_NAME: "${{ inputs.name }}"
+        PACKAGE_URL: "${{ inputs.repo }}"
+        PACKAGE_REF: "${{ inputs.ref }}"
+        DISTRO: "${{ inputs.distro }}"
+        CODENAME: "${{ inputs.codename }}"
+        STAGE: "${{ inputs.stage }}"
+        GPG_EMAIL: "${{ inputs.gpg-email }}"
+        GPG_NAME: "${{ inputs.gpg-name }}"
+      run: $GITHUB_ACTION_PATH/build-package.sh
