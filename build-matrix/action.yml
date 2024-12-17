@@ -18,4 +18,4 @@ runs:
     - name: Matrix Includes Builder
       id: builder
       shell: bash
-      run: $GITHUB_ACTION_PATH/entrypoint.sh
+      run: $GITHUB_ACTION_PATH/build-matrix.sh
