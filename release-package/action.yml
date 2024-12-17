@@ -1,0 +1,10 @@
+name: Release Package
+description: |
+  TODO
+
+runs:
+  using: composite
+  steps:
+    - name: Get Voulage
+      shell: bash
+      run: $GITHUB_ACTION_PATH/get-voulage.sh
