@@ -7,6 +7,21 @@ format. The list is being built out of `stage/unstable` folder of [voulage].
 
 ```yaml
 - uses: regolith-linux/actions/build-matrix@main
+  with:
+    # name of the package to build.
+    #
+    # Required.
+    name: "..."
+
+    # repo is the package git repository URL (it can be both ssh and https).
+    #
+    # Required.
+    repo: "..."
+
+    # ref is a valid git repository ref to checkout the code from (e.g. branch, tag, or hash).
+    #
+    # Required.
+    ref: "..."
 ```
 
 ## Outputs

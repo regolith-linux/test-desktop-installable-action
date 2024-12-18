@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+echo "PACKAGE_NAME: '${PACKAGE_NAME}'"
+echo "PACKAGE_REPO: '${PACKAGE_REPO}'"
+echo "PACKAGE_REF: '${PACKAGE_REF}'"
+
 voulage_path="/tmp/voulage-actions-cache"
 
 pushd "$voulage_path" >/dev/null || exit 1

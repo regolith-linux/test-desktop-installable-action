@@ -4,6 +4,17 @@ description: |
   format. The list is being built out of `stage/unstable` folder of voulage repository
   at https://github.com/regolith-linux/voulage/
 
+inputs:
+  name:
+    description: "Name of the package"
+    required: true
+  repo:
+    description: "Package git repository URL (it can be both ssh and https)"
+    required: true
+  ref:
+    description: "Package git repository ref to check the support (e.g. branch, tag, or hash)"
+    required: true
+
 outputs:
   includes:
     description: "The serialized JSON list of matrix include items"
@@ -19,4 +30,9 @@ runs:
     - name: Matrix Includes Builder
       id: builder
       shell: bash
+      env:
+        PACKAGE_NAME: "${{ inputs.name }}"
+        PACKAGE_REPO: "${{ inputs.repo }}"
+        PACKAGE_REF: "${{ inputs.ref }}"
       run: $GITHUB_ACTION_PATH/build-matrix.sh
+
