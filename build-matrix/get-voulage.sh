@@ -2,7 +2,7 @@
 
 voulage_path="/tmp/voulage-actions-cache"
 voulage_repo="https://github.com/regolith-linux/voulage.git"
-voulage_ref="main"
+voulage_ref="new-actions"
 
 if [ ! -d "$voulage_path" ]; then
   git clone --quiet --no-tags --branch "$voulage_ref" "$voulage_repo" "$voulage_path"
