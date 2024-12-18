@@ -3,44 +3,59 @@
 set -e
 
 # echo "PACKAGE_NAME: '${PACKAGE_NAME}'"
-# echo "PACKAGE_REPO: '${PACKAGE_REPO}'"
 # echo "PACKAGE_REF: '${PACKAGE_REF}'"
 
 voulage_path="/tmp/voulage-actions-cache"
 
 pushd "$voulage_path" >/dev/null || exit 1
 
-cat stage/unstable/package-model.json | jq -r '.packages | .["'${PACKAGE_NAME}'"]'
+if [ ! -d stage ]; then
+  echo "Error: stage doesn't exist"
+  exit 1
+fi
+if [ ! -d stage/$BUILD_STAGE ]; then
+  echo "Error: stage/$BUILD_STAGE doesn't exist"
+  exit 1
+fi
+
+# if [ -f stage/$BUILD_STAGE/package-model.json ]; then
+#   cat stage/$BUILD_STAGE/package-model.json | jq -r '.packages | .["'${PACKAGE_NAME}'"]'
+# fi
 
 echo "Supported distro/codename:"
 
 includes=()
-for dir in stage/unstable/*/*/; do
+for dir in stage/$BUILD_STAGE/*/*/; do
   distro=$(echo "$dir" | cut -d/ -f3)
   codename=$(echo "$dir" | cut -d/ -f4)
 
   skip="false"
-  model_file="stage/unstable/$distro/$codename/package-model.json"
+  model_file="stage/$BUILD_STAGE/$distro/$codename/package-model.json"
 
   if [ -f $model_file ]; then
     packages=$(cat $model_file | jq -r '.packages')
     has_package=$(echo "$packages" | jq 'has("'${PACKAGE_NAME}'")')
 
-    # echo "has_package in $distro, $codename: $has_package"
-
+    # Package is listed in package-model.json file.
+    #
+    # This could mean either of:
+    #  - the package ref gets overridden
+    #  - the package should be completely skipped
     if [ "$has_package" == "true" ]; then
       package=$(echo "$packages" | jq -r '.["'${PACKAGE_NAME}'"]')
 
-      if [ "$package" != "null" ]; then
+      # Package is explictly set to null. don't build it for this distro/codename
+      if [ "$package" == "null" ]; then
+        skip="true"
+        echo "  - $distro/$codename: Don't Build"
+      else
         ref=$(echo $package | jq -r '.ref')
 
+        # Package ref is different that the ref we are executing this on
         if [ "$ref" != "$PACKAGE_REF" ]; then
           skip="true"
           echo "  - $distro/$codename: Skipped ($ref)"
         fi
-      else
-        skip="true"
-        echo "  - $distro/$codename: Don't Build"
       fi
     fi
   fi
@@ -55,19 +70,10 @@ for dir in stage/unstable/*/*/; do
   fi
 
   echo "  - $distro/$codename: OK"
-  include=$(
-    jq \
-      -n \
-      -c \
-      --arg distro "$distro" \
-      --arg codename "$codename" \
-      '$ARGS.named'
-  )
-  includes+=("$include")
+  includes+=("$(jq -n -c --arg distro "$distro" --arg codename "$codename" '$ARGS.named')")
 done
 
 popd >/dev/null || exit 1
 
 # shellcheck disable=SC2086
-jq -n "[$(printf '%s\n' "${includes[@]}" | paste -sd,)]" '$ARGS.named'
 echo "includes=$(jq -n -c "[$(printf '%s\n' "${includes[@]}" | paste -sd,)]" '$ARGS.named')" >> $GITHUB_OUTPUT

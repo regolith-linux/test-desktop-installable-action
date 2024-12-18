@@ -8,11 +8,11 @@ inputs:
   name:
     description: "Name of the package"
     required: true
-  repo:
-    description: "Package git repository URL (it can be both ssh and https)"
-    required: true
   ref:
     description: "Package git repository ref to check the support (e.g. branch, tag, or hash)"
+    required: true
+  stage:
+    description: "Package git repository URL (it can be both ssh and https)"
     required: true
 
 outputs:
@@ -32,7 +32,7 @@ runs:
       shell: bash
       env:
         PACKAGE_NAME: "${{ inputs.name }}"
-        PACKAGE_REPO: "${{ inputs.repo }}"
         PACKAGE_REF: "${{ inputs.ref }}"
+        BUILD_STAGE: "${{ inputs.stage }}"
       run: $GITHUB_ACTION_PATH/build-matrix.sh
 
