@@ -12,9 +12,6 @@ pushd "$voulage_path" >/dev/null || exit 1
 
 cat stage/unstable/package-model.json | jq -r '.packages | .["'${PACKAGE_NAME}'"]'
 
-# jq -r '.packages' | jq 'has("'${NAME}'")'
-# jq -r '.packages' | jq -r '.["'${NAME}'"]'
-
 echo "Supported distro/codename:"
 
 includes=()
@@ -23,7 +20,7 @@ for dir in stage/unstable/*/*/; do
   codename=$(echo "$dir" | cut -d/ -f4)
 
   skip="false"
-  ref="$PACKAGE_REF"
+  # ref="$PACKAGE_REF"
   model_file="stage/unstable/$distro/$codename/package-model.json"
 
   if [ -f $model_file ]; then
@@ -38,8 +35,12 @@ for dir in stage/unstable/*/*/; do
 
       if [ "$package" != "null" ]; then
         ref=$(echo $package | jq -r '.ref')
-      else
-        skip="true"
+
+        if [ "$ref" != "$PACKAGE_REF" ]; then
+          skip="true"
+        fi
+      # else
+      #   skip="true"
       fi
     fi
   fi
@@ -52,7 +53,7 @@ for dir in stage/unstable/*/*/; do
         -c \
         --arg distro "$distro" \
         --arg codename "$codename" \
-        --arg ref "$ref" \
+        --arg ref "$PACKAGE_REF" \
         '$ARGS.named'
     )
     includes+=("$include")
