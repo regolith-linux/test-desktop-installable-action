@@ -29,9 +29,11 @@ for dir in stage/unstable/*/*/; do
   if [ -f $model_file ]; then
     # has_package=$(cat $model_file | jq -r '.packages | .["'${PACKAGE_NAME}'"]')
     has_package=$(cat $model_file | jq 'has("'${NAME}'")')
+    echo "has_package in $distro, $codename: $has_package"
 
     if [ "$has_package" == "true" ]; then
       package=$(cat $model_file | jq -r '.packages' | jq -r '.["'${NAME}'"]')
+      echo "the package: $package"
 
       if [ "$package" != "null" ]; then
         ref=$(echo $package | jq -r '.ref')
