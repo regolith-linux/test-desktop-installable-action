@@ -20,24 +20,24 @@ for dir in stage/unstable/*/*/; do
   codename=$(echo "$dir" | cut -d/ -f4)
 
   skip="false"
-  # ref="$PACKAGE_REF"
   model_file="stage/unstable/$distro/$codename/package-model.json"
 
   if [ -f $model_file ]; then
     packages=$(cat $model_file | jq -r '.packages')
     has_package=$(echo "$packages" | jq 'has("'${PACKAGE_NAME}'")')
 
-    echo "has_package in $distro, $codename: $has_package"
+    # echo "has_package in $distro, $codename: $has_package"
 
     if [ "$has_package" == "true" ]; then
       package=$(echo "$packages" | jq -r '.["'${PACKAGE_NAME}'"]')
-      echo "the package: $package"
+      # echo "the package: $package"
 
       if [ "$package" != "null" ]; then
         ref=$(echo $package | jq -r '.ref')
 
         if [ "$ref" != "$PACKAGE_REF" ]; then
           skip="true"
+          echo "  - $distro/$codename: Skipped"
         fi
       # else
       #   skip="true"
@@ -45,19 +45,25 @@ for dir in stage/unstable/*/*/; do
     fi
   fi
 
-  if [ "$skip" == "false" ]; then
-    echo "  - $distro/$codename"
-    include=$(
-      jq \
-        -n \
-        -c \
-        --arg distro "$distro" \
-        --arg codename "$codename" \
-        --arg ref "$PACKAGE_REF" \
-        '$ARGS.named'
-    )
-    includes+=("$include")
+  # Skip for this distro/codename pair.
+  #
+  # Possible reasons:
+  #  - it is explictly set to "null" in package-model
+  #  - it points to some other "ref" in package model
+  if [ "$skip" == "true" ]; then
+    continue
   fi
+
+  echo "  - $distro/$codename: OK"
+  include=$(
+    jq \
+      -n \
+      -c \
+      --arg distro "$distro" \
+      --arg codename "$codename" \
+      '$ARGS.named'
+  )
+  includes+=("$include")
 done
 
 popd >/dev/null || exit 1
