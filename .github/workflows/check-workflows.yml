@@ -1,13 +1,15 @@
-name: Update workflow files
+name: Check Workflow files
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '0 2 1 * *'
   pull_request:
+    paths:
+      - "test-desktop/**"
   push:
     branches:
       - main
+    paths:
+      - "test-desktop/**"
 
 jobs:
   workflow-files:
@@ -18,8 +20,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          ref: ${{ github.head_ref }}
 
       - name: Setup Go
         uses: actions/setup-go@v5
@@ -29,9 +29,5 @@ jobs:
       - name: Generate workflow files
         run: go run test-desktop/main.go
 
-      - uses: stefanzweifel/git-auto-commit-action@v5
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          file_pattern: '.github/workflows/*.yml'
-          commit_message: "chore: update ci and test workflow files"
+      - name: Check workflow files
+        run: test -z "$(git status --porcelain)" || exit 1

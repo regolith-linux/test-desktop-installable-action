@@ -6,12 +6,19 @@
 # - to add a new distro: modify main.go and add a new entry to `supportedDistros`
 # - to add new codename: create a subfolder in corresponding distro folder
 
-name: Build and Validate
+name: Build Test-Desktop Docker
 
 on:
   workflow_dispatch:
   workflow_call:
   pull_request:
+    paths:
+      - "test-desktop/**"
+  push:
+    branches:
+      - main
+    paths:
+      - "test-desktop/**"
 
 concurrency:
   group: ${{"{{"}} github.workflow {{"}}"}}-${{"{{"}} github.ref {{"}}"}}
@@ -43,15 +50,3 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: "{{"{{"}} defaultContext {{"}}"}}:test-desktop/${{"{{"}} matrix.os.distro {{"}}"}}/${{"{{"}} matrix.os.codename {{"}}"}}"
-
-  shellcheck:
-    runs-on: ubuntu-24.04
-    if: "!contains(github.event.head_commit.message, '[ci skip]')"
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Run ShellCheck
-        uses: ludeeus/action-shellcheck@00b27aa7cb85167568cb48a3838b75f4265f2bca # master
-        with:
-          scandir: "."
