@@ -1,0 +1,38 @@
+name: Import GPG Key
+description: |
+  Import given GPG private key with its associated email and full name.
+
+inputs:
+  gpg-email:
+    description: "Email ID associated with the GPG Key"
+    required: true
+    default: "regolith.linux@gmail.com"
+  gpg-name:
+    description: "Full Name associated with the GPG Key"
+    required: true
+    default: "Regolith Linux"
+  gpg-key:
+    description: "GPG Private Key"
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Environment Setup
+      shell: bash
+      run: apt update && DEBIAN_FRONTEND=noninteractive apt install -y --no-install-recommends gpg gpg-agent
+
+    - name: Import GPG Key
+      shell: bash
+      run: |
+        mkdir -p ~/.gnupg/
+
+        export DEBEMAIL="${{ inputs.gpg-email }}"
+        export DEBFULLNAME="${{ inputs.gpg-name }}"
+
+        printf "${{ inputs.gpg-key }}" | base64 --decode > ~/.gnupg/private.key
+
+        chown -R $(whoami) ~/.gnupg/
+        chmod 600 ~/.gnupg/*
+        chmod 700 ~/.gnupg
+        gpg --batch --import ~/.gnupg/private.key
