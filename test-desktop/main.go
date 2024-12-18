@@ -18,8 +18,8 @@ const (
 
 var supportedDistros = []distribution{Debian, Ubuntu}
 
-//go:embed _templates/ci.tmpl
-var tplCI []byte
+//go:embed _templates/test-docker.tmpl
+var tplDockerTest []byte
 
 //go:embed _templates/test-old-repo.tmpl
 var tplOldRepoTest []byte
@@ -37,7 +37,7 @@ func main() {
 		os.Exit(1)
 	}
 
-	if err := renderFiles(tplCI, "ci", distros); err != nil {
+	if err := renderFiles(tplDockerTest, "test-docker", distros); err != nil {
 		fmt.Fprintf(os.Stderr, "Error: %s\n", err.Error())
 		os.Exit(1)
 	}
