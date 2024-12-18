@@ -27,12 +27,13 @@ for dir in stage/unstable/*/*/; do
   model_file="stage/unstable/$distro/$codename/package-model.json"
 
   if [ -f $model_file ]; then
-    # has_package=$(cat $model_file | jq -r '.packages | .["'${PACKAGE_NAME}'"]')
-    has_package=$(cat $model_file | jq 'has("'${PACKAGE_NAME}'")')
+    packages=$(cat $model_file | jq -r '.packages')
+    has_package=$(echo "$packages" | jq 'has("'${PACKAGE_NAME}'")')
+
     echo "has_package in $distro, $codename: $has_package"
 
     if [ "$has_package" == "true" ]; then
-      package=$(cat $model_file | jq -r '.packages' | jq -r '.["'${PACKAGE_NAME}'"]')
+      package=$(echo "$packages" | jq -r '.["'${PACKAGE_NAME}'"]')
       echo "the package: $package"
 
       if [ "$package" != "null" ]; then
