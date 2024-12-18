@@ -1,0 +1,37 @@
+name: Publish Repository
+description: |
+  Publish packages of supported distro(s), codename(s), and component(s) to a new
+  or existing archive repository.
+
+inputs:
+  server-address:
+    description: "Publish Server IP address"
+    required: true
+  server-user:
+    description: "Server SSH username"
+    required: true
+  packages-path:
+    description: "Path on disk that conntains the packages"
+    required: true
+    default: "/opt/archives/packages/"
+  only-distro:
+    description: "A filter to only publish repository for this distro"
+    required: false
+  only-codename:
+    description: "A filter to only publish repository for this codename"
+    required: false
+  only-component:
+    description: "A filter to only publish repository for this component"
+    required: false
+
+runs:
+  using: composite
+  steps:
+    - name: Publish Package
+      shell: bash
+      run: |
+        set -e
+
+        ssh-keyscan -H ${{ inputs.server-address }} >> ~/.ssh/known_hosts
+        ssh ${{ inputs.server-user }}@${{ inputs.server-address }} "publish-repos.sh \"${{ inputs.packages-path }}\" \"${{ inputs.only-distro }}\" \"${{ inputs.only-codename }}\" \"${{ inputs.only-component }}\""
+        ssh ${{ inputs.server-user }}@${{ inputs.server-address }} "find \"${{ inputs.packages-path }}\" "
