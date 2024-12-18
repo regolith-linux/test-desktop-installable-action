@@ -31,7 +31,8 @@ jobs:
         uses: regolith-linux/actions/build-matrix@main
 
   build:
-    runs-on: [self-hosted, Linux, X64, "${{ matrix.codename }}"] 
+    runs-on: ubuntu-24.04
+    container: "${{ matrix.distro }}:${{ matrix.codename }}"
     needs: matrix-builder
     strategy:
       fail-fast: false
