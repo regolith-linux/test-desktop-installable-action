@@ -2,9 +2,9 @@
 
 set -e
 
-echo "PACKAGE_NAME: '${PACKAGE_NAME}'"
-echo "PACKAGE_REPO: '${PACKAGE_REPO}'"
-echo "PACKAGE_REF: '${PACKAGE_REF}'"
+# echo "PACKAGE_NAME: '${PACKAGE_NAME}'"
+# echo "PACKAGE_REPO: '${PACKAGE_REPO}'"
+# echo "PACKAGE_REF: '${PACKAGE_REF}'"
 
 voulage_path="/tmp/voulage-actions-cache"
 
@@ -36,11 +36,11 @@ for dir in stage/unstable/*/*/; do
 
         if [ "$ref" != "$PACKAGE_REF" ]; then
           skip="true"
-          echo "  - $distro/$codename: Wrong ref ($ref)"
+          echo "  - $distro/$codename: Skipped ($ref)"
         fi
       else
         skip="true"
-        echo "  - $distro/$codename: Skipped"
+        echo "  - $distro/$codename: Don't Build"
       fi
     fi
   fi
