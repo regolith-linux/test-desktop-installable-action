@@ -30,17 +30,17 @@ for dir in stage/unstable/*/*/; do
 
     if [ "$has_package" == "true" ]; then
       package=$(echo "$packages" | jq -r '.["'${PACKAGE_NAME}'"]')
-      # echo "the package: $package"
 
       if [ "$package" != "null" ]; then
         ref=$(echo $package | jq -r '.ref')
 
         if [ "$ref" != "$PACKAGE_REF" ]; then
           skip="true"
-          echo "  - $distro/$codename: Skipped"
+          echo "  - $distro/$codename: Wrong ref ($ref)"
         fi
-      # else
-      #   skip="true"
+      else
+        skip="true"
+        echo "  - $distro/$codename: Skipped"
       fi
     fi
   fi
