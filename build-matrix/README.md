@@ -1,7 +1,7 @@
-# Build Matrix of Supported Distros and Codenames
+# Build Matrix of Supported OS
 
-Build a matrix of currently supported distros and codenames. The list is being
-built out of `stage/unstable` folder of [voulage].
+Build a matrix of currently supported distros and codenames in encoded JSON list
+format. The list is being built out of `stage/unstable` folder of [voulage].
 
 ## Usage
 
