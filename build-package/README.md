@@ -6,8 +6,7 @@ name, package repo, and package ref to checkout the code.
 ## Usage
 
 ```yaml
-- name: Build Package
-  uses: regolith-linux/actions/build-package@main
+- uses: regolith-linux/actions/build-package@main
   with:
     # name of the package to build.
     #
