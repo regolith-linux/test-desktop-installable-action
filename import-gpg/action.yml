@@ -3,6 +3,9 @@ description: |
   Import given GPG private key with its associated email and full name.
 
 inputs:
+  gpg-key:
+    description: "GPG Private Key to import"
+    required: true
   gpg-email:
     description: "Email ID associated with the GPG Key"
     required: true
@@ -11,9 +14,6 @@ inputs:
     description: "Full Name associated with the GPG Key"
     required: true
     default: "Regolith Linux"
-  gpg-key:
-    description: "GPG Private Key"
-    required: true
 
 runs:
   using: composite

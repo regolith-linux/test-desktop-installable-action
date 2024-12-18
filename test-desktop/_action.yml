@@ -1,17 +1,22 @@
-name: 'Test in Container'
-description: 'Run tests in a Docker container'
+name: Test if regolith-desktop is Installable
+description: |
+  Test that regolith-desktop is installable on a target system given public key,
+  apt config line, and package(s) name (e.g. `regolith-session-sway`).
+
 inputs:
   apt-key-url:
-    description: 'URL to public key of repository'
+    description: "URL to public key of repository to import"
     required: true
   apt-repo-line:
-    description: 'Line to add to apt sources'
+    description: "Deb line to add to apt sources"
     required: true
   target-package:
-    description: 'Name of package to install'
+    description: "Space-separated name of packages to install"
+    required: true
+
 runs:
-  using: 'docker'
-  image: 'Dockerfile'
+  using: docker
+  image: Dockerfile
   args:
     - ${{ inputs.apt-key-url }}
     - ${{ inputs.apt-repo-line }}    

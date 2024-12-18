@@ -5,7 +5,7 @@ description: |
 
 outputs:
   includes:
-    description: "List of matrix include items"
+    description: "The serialized JSON list of matrix include items"
     value: ${{ steps.builder.outputs.includes }}
 
 runs:

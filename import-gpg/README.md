@@ -7,17 +7,17 @@ Import given GPG private key with its associated email and full name.
 ```yaml
 - uses: regolith-linux/actions/import-gpg@main
   with:
-    # GPG Private Key
+    # gpg-key is the GPG private key to import.
     #
     # Required.
     gpg-key: "..."
 
-    # Email ID associated with the GPG Key.
+    # gpg-email is the email ID associated with the GPG Key.
     #
     # Required.
     gpg-email: regolith.linux@gmail.com
 
-    # Full Name associated with the GPG Key.
+    # gpg-name is the full name associated with the GPG Key.
     #
     # Required.
     gpg-name: Regolith Linux

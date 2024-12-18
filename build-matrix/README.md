@@ -6,16 +6,14 @@ built out of `stage/unstable` folder of [voulage].
 ## Usage
 
 ```yaml
-jobs:
-  matrix-builder:
-    runs-on: ubuntu-24.04
-    outputs:
-      includes: ${{ steps.builder.outputs.includes }}
-    steps:
-      - name: Build Matrix
-        id: builder
-        uses: regolith-linux/actions/build-matrix@main
+- uses: regolith-linux/actions/build-matrix@main
 ```
+
+## Outputs
+
+| Name | Description | Example |
+|------|-------------|---------|
+| `includes` | Encoded JSON list of matrix `include` items | <pre>[{<br>&emsp;&emsp;"distro": "ubuntu",<br>&emsp;&emsp;"codename": "noble"<br>}, {<br>&emsp;&emsp;"distro": "ubuntu",<br>&emsp;&emsp;"codename": "oracular"<br>}]</pre> |
 
 ## Scenarios
 
