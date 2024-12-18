@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 echo "PACKAGE_NAME: '${PACKAGE_NAME}'"
 echo "PACKAGE_REPO: '${PACKAGE_REPO}'"
 echo "PACKAGE_REF: '${PACKAGE_REF}'"
