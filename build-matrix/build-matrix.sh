@@ -10,10 +10,14 @@ pushd "$voulage_path" >/dev/null || exit 1
 
 echo "Supported distro/codename:"
 
+cat stage/unstable/package-model.json | jq -r '.packages | .'${PACKAGE_NAME}
+
 includes=()
 for dir in stage/unstable/*/*/; do
   distro=$(echo "$dir" | cut -d/ -f3)
   codename=$(echo "$dir" | cut -d/ -f4)
+
+  cat stage/unstable/$distro/$codename/package-model.json | jq -r '.packages | .'${PACKAGE_NAME}
 
   echo "  - $distro/$codename"
   include=$(
@@ -30,5 +34,5 @@ done
 popd >/dev/null || exit 1
 
 # shellcheck disable=SC2086
-jq -n -c "[$(printf '%s\n' "${includes[@]}" | paste -sd,)]" '$ARGS.named'
+jq -n "[$(printf '%s\n' "${includes[@]}" | paste -sd,)]" '$ARGS.named'
 echo "includes=$(jq -n -c "[$(printf '%s\n' "${includes[@]}" | paste -sd,)]" '$ARGS.named')" >> $GITHUB_OUTPUT
