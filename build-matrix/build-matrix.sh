@@ -28,7 +28,7 @@ for dir in stage/unstable/*/*/; do
 
   if [ -f $model_file ]; then
     # has_package=$(cat $model_file | jq -r '.packages | .["'${PACKAGE_NAME}'"]')
-    has_package=$(cat $model_file | | jq 'has("'${NAME}'")')
+    has_package=$(cat $model_file | jq 'has("'${NAME}'")')
 
     if [ "$has_package" == "true" ]; then
       package=$(cat $model_file | jq -r '.packages' | jq -r '.["'${NAME}'"]')
