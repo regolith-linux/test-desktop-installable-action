@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 voulage_path="/tmp/voulage-actions-cache"
 voulage_repo="https://github.com/regolith-linux/voulage.git"
 voulage_ref="new-actions"
