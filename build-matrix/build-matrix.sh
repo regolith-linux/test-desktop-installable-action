@@ -16,10 +16,19 @@ for dir in stage/unstable/*/*/; do
   codename=$(echo "$dir" | cut -d/ -f4)
 
   echo "  - $distro/$codename"
-  includes+=("$(jq -n -c --arg distro "$distro" --arg codename "$codename" '$ARGS.named')")
+  include=$(
+    jq \
+      -n \
+      -c \
+      --arg distro "$distro" \
+      --arg codename "$codename" \
+      '$ARGS.named'
+  )
+  includes+=("$include")
 done
 
 popd >/dev/null || exit 1
 
 # shellcheck disable=SC2086
+jq -n -c "[$(printf '%s\n' "${includes[@]}" | paste -sd,)]" '$ARGS.named'
 echo "includes=$(jq -n -c "[$(printf '%s\n' "${includes[@]}" | paste -sd,)]" '$ARGS.named')" >> $GITHUB_OUTPUT
