@@ -1,7 +1,8 @@
-name: Build Matrix of Supported Distros and Codenames
+name: Build Matrix of Supported OS
 description: |
-  Build a matrix of currently supported distros and codenames. The list is being
-  built out of `stage/unstable` folder of https://github.com/regolith-linux/voulage/.
+  Build a matrix of currently supported distros and codenames in encoded JSON list
+  format. The list is being built out of `stage/unstable` folder of voulage repository
+  at https://github.com/regolith-linux/voulage/
 
 outputs:
   includes:

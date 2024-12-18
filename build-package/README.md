@@ -1,7 +1,7 @@
-# Build a Package for specific Distro and Codename
+# Build Package
 
-Build a package for spefici distro/codename pair. It only builds it locally
-without signing.
+Build a package for speficied distro/codename/stage triplet. It uses package
+name, package repo, and package ref to checkout the code.
 
 ## Usage
 
