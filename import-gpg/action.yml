@@ -19,7 +19,7 @@ runs:
   using: composite
   steps:
     - name: Ensure Sudo
-      uses: regolith-linux/actions/ensure-sudo@main
+      uses: regolith-linux/actions/ensure-sudo@enhance-build-matrix
 
     - name: Environment Setup
       shell: bash

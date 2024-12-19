@@ -42,7 +42,9 @@ runs:
   steps:
     - name: Get Voulage
       id: voulage
-      uses: regolith-linux/actions/get-voulage@main
+      uses: regolith-linux/actions/get-voulage@enhance-build-matrix
+      with:
+        ref: "new-actions"
 
     - name: Import GPG Key
       uses: regolith-linux/actions/import-gpg@main
@@ -52,7 +54,7 @@ runs:
         gpg-name: "${{ inputs.gpg-name }}"
 
     - name: Ensure Sudo
-      uses: regolith-linux/actions/ensure-sudo@main
+      uses: regolith-linux/actions/ensure-sudo@enhance-build-matrix
 
     - name: Environment Setup
       shell: bash
