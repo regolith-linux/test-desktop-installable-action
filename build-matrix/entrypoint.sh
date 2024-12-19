@@ -6,7 +6,6 @@ if [ -z "$VOULAGE_PATH" ]; then
   echo "Error: VOULAGE_PATH is empty"
   exit 1
 fi
-
 if [ ! -d "$VOULAGE_PATH" ]; then
   echo "Error: voulage repo not found"
   exit 1
@@ -22,6 +21,15 @@ if [ ! -d stage/$BUILD_STAGE ]; then
   echo "Error: stage/$BUILD_STAGE doesn't exist"
   exit 1
 fi
+
+# # TODO
+#
+# echo "PACKAGE_NAME: '${PACKAGE_NAME}'"
+# echo "PACKAGE_REF: '${PACKAGE_REF}'"
+#
+# if [ -f stage/$BUILD_STAGE/package-model.json ]; then
+#   cat stage/$BUILD_STAGE/package-model.json | jq -r '.packages | .["'${PACKAGE_NAME}'"]'
+# fi
 
 includes=()
 
