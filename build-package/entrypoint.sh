@@ -23,7 +23,7 @@ echo "Building ${PACKAGE_NAME} for ${DISTRO}/${CODENAME} (stage=${STAGE} arch=${
 "${VOULAGE_PATH}/.github/scripts/ci-build.sh" \
   --package-name "${PACKAGE_NAME}" \
   --extension "ext-debian.sh" \
-  --pkg-build-path "$(realpath "$WORKSPACE_PATH")/../" \
+  --pkg-build-path "$(realpath "$(realpath "$WORKSPACE_PATH")/../")" \
   --pkg-publish-path "${ACTIONS_PATH}/publish" \
   --distro "${DISTRO}" \
   --codename "${CODENAME}" \
