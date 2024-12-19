@@ -20,11 +20,13 @@ export DEBFULLNAME="${GPG_NAME}"
 
 echo "Building ${PACKAGE_NAME} for ${DISTRO}/${CODENAME} (stage=${STAGE} arch=${ARCH} component=${COMPONENT})..."
 
+WORKSPACE_ROOT_PATH=$(realpath "$(realpath "$WORKSPACE_PATH")/../")
+
 "${VOULAGE_PATH}/.github/scripts/ci-build.sh" \
   --package-name "${PACKAGE_NAME}" \
   --extension "ext-debian.sh" \
-  --pkg-build-path "$(realpath "$(realpath "$WORKSPACE_PATH")/../")" \
-  --pkg-publish-path "${ACTIONS_PATH}/publish" \
+  --pkg-build-path "${WORKSPACE_ROOT_PATH}" \
+  --pkg-publish-path "${WORKSPACE_ROOT_PATH}/publish" \
   --distro "${DISTRO}" \
   --codename "${CODENAME}" \
   --stage "${STAGE}" \
@@ -32,4 +34,4 @@ echo "Building ${PACKAGE_NAME} for ${DISTRO}/${CODENAME} (stage=${STAGE} arch=${
   --component "${COMPONENT}" \
   --arch "${ARCH}"
 
-find "${ACTIONS_PATH}/publish"
+find "${WORKSPACE_ROOT_PATH}/publish"
